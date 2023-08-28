@@ -10,15 +10,4 @@ function App() {
   )
 }
 
-// General info:
-// Current number of cards turned over
-// Current pot amount
-// Buttons for calling/checking betting and folding
-// 
-// Info per player:
-// Players name and chips
-// 
-// Keep track of:
-// Chips, Phase, Bet per player, Current Player
-
 export default App

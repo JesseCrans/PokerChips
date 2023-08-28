@@ -1,0 +1,13 @@
+.card-graphic {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card {
+  width: 30px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}

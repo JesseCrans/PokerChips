@@ -1,87 +1,61 @@
 import './Game.css'
 
-import MainInfo from './MainInfo/MainInfo'
-import Buttons from './Buttons/Buttons'
-import Players from './Players/Players'
-import NewPlayerForm from './NewPlayerForm/NewPlayerForm'
-
-import PlayerLogic from './Classes/PlayerClass'
+import GameInfo from './GameInfo/GameInfo';
+import Players from './Players/Players';
+import ActionButtons from './ActionButtons/ActionButtons';
 
 import { useState } from 'react'
 
 export default function Game() {
-  const [players, setPlayers] = useState([]);
-  const [pot, setPot] = useState(0);
-  const [turnPhase, setTurnPhase] = useState(0);
-  const [bigBlind, setBigBlind] = useState(0);
+  const [gameState, setGameState] = useState({
+    playerList: [],
+    turnIndex: 0,
+    dealerIndex: 0,
+    roundsPlayed: 0,
+    phaseOfTurn: 0,
+    chipsInPot: 0,
+    bigBlind: 0
+  })
+  const [gameInProgress, setGameInProgress] = useState(true);
 
-  const [addingPlayer, setAddingPlayer] = useState(false);
-  const [inputText, setInputText] = useState('');
-
-  function addPlayer(playerName) {
-    setPlayers([
-      ...players,
-      new PlayerLogic(playerName)
-    ])
+  function callFunction() {
+    console.log('Call');
+    return;
   }
 
-  function handleAddPlayer() {
-    setAddingPlayer(true);
+  function raiseFunction() {
+    console.log('Raise');
+    return;
   }
 
-  function handleInputChange(e) {
-    setInputText(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    addPlayer(inputText);
-    setAddingPlayer(false);
+  function foldFunction() {
+    console.log('Fold');
+    return;
   }
 
   return (
-    <section className='game'>
-      <MainInfo
-        phase={turnPhase}
-        pot={pot}
-      />
-      <Buttons />
-      <Players
-        playersArray={players}
-        handleAddPlayer={handleAddPlayer}
-      />
+    <section className='game-section'>
       {
-        (addingPlayer) ?
-          <form
-            className='new-player-form'
-            onSubmit={handleSubmit}
-          >
-            <input
-              type='text'
-              onChange={handleInputChange}
-              className='new-player-name'
-              maxLength={10}
+        (gameInProgress) ?
+          <div className='game'>
+            <GameInfo
+              phaseOfTurn={gameState.phaseOfTurn}
+              chipsInPot={gameState.chipsInPot}
+              bigBlind={gameState.bigBlind}
             />
-            <button
-              className='new-player-name-submit'
-              type='submit'
-            >
-              Add Player
-            </button>
-          </form>
-          : ''
+            <Players
+              playerList={gameState.playerList}
+              turnIndex={gameState.turnIndex}
+              dealerIndex={gameState.dealerIndex}
+            />
+            <ActionButtons
+              callFunction={callFunction}
+              raiseFunction={raiseFunction}
+              foldFunction={foldFunction}
+            />
+          </div>
+          : <MakeNewGame />
       }
     </section>
   )
 }
-
-/*
-Game structure:
-    - Player object with name and current chips,
-    these objects will be tracked in the state
-    and passed to the Players component
-    - Then we need a state for the pot
-    and for the phase of turn
-    these will be passed to the maininfo component
-
-*/

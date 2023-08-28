@@ -1,7 +1,7 @@
 export default class PlayerLogic {
-    constructor(name) {
+    constructor(name, chips) {
         this.name = name;
-        this.chips = 0;
+        this.chips = parseInt(chips);
     }
 
     get name() {

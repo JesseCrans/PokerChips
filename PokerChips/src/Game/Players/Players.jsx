@@ -1,43 +1,18 @@
-import './Players.css'
-import Player from './Player/Player'
-import AddPlayerButton from './AddPlayerButton/AddPlayerButton'
-import { useState } from 'react'
+import './Players.css';
 
-export default function Players({ playersArray, handleAddPlayer }) {
+export default function Players({
+  playerList, turnIndex, dealerIndex
+}) {
   return (
     <div className='players'>
-      <div className='left'>
-        {
-          playersArray.map((player, index) => {
-            if (index < playersArray.length / 2) {
-              return (
-                <Player
-                  name={player.name}
-                  chips={player.chips}
-                  key={player.name}
-                />
-              );
-            }
-          })
-        }
+      <div className='left-side'>
+        <p>Player1</p>
+        <p>Player2</p>
+        <p>Player3</p>
       </div>
-      <div className='right'>
-        {
-          playersArray.map((player, index) => {
-            if (index >= playersArray.length / 2) {
-              return (
-                <Player
-                  name={player.name}
-                  chips={player.chips}
-                  key={player.name}
-                />
-              );
-            }
-          })
-        }
-        {
-          (playersArray.length < 6) ? <AddPlayerButton handleClick={handleAddPlayer} /> : ''
-        }
+      <div className='right-side'>
+        <p>Player4</p>
+        <p>Player5</p>
       </div>
     </div>
   )

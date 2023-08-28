@@ -1,0 +1,22 @@
+.game-info {
+  width: 300px;
+  height: 300px;
+  min-width: 300px;
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.chips-in-pot::before {
+  content: '$'
+}
+
+.big-blind::before {
+  content: '$'
+}
