@@ -1,22 +1,47 @@
 import './Game.css'
 
-import GameInfo from './GameInfo/GameInfo';
-import Players from './Players/Players';
-import ActionButtons from './ActionButtons/ActionButtons';
+import GameInfo from './Components/GameInfo';
+import Players from './Components/Players';
+import ActionButtons from './Components/ActionButtons';
+import NewGame from './Components/NewGame';
 
-import { useState } from 'react'
+import PlayerLogic from './Auxiliary/PlayerLogic';
+
+import { useState, useEffect } from 'react'
 
 export default function Game() {
   const [gameState, setGameState] = useState({
-    playerList: [],
-    turnIndex: 0,
-    dealerIndex: 0,
-    roundsPlayed: 0,
-    phaseOfTurn: 0,
-    chipsInPot: 0,
-    bigBlind: 0
+    players: [],
+    turn: 0,
+    dealer: 0,
+    round: 0,
+    phase: 0,
+    bigBlind: 0,
+    bigBlindIncrement: 0,
+    bigBlindTurn: 0,
+    pot: 0,
+    inProgress: false,
   })
-  const [gameInProgress, setGameInProgress] = useState(true);
+
+  useEffect(() => {
+    const gameState = JSON.parse(localStorage.getItem('gameState'));
+    if (gameState.players.length > 0) {
+      setGameState(gameState)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (gameState.players.length > 0) {
+      localStorage.setItem('gameState', JSON.stringify(gameState));
+    }
+  }, [gameState])
+
+  function updateGameState(key, value) {
+    setGameState({
+      ...gameState,
+      [key]: value,
+    })
+  }
 
   function callFunction() {
     console.log('Call');
@@ -33,29 +58,46 @@ export default function Game() {
     return;
   }
 
-  return (
-    <section className='game-section'>
-      {
-        (gameInProgress) ?
-          <div className='game'>
-            <GameInfo
-              phaseOfTurn={gameState.phaseOfTurn}
-              chipsInPot={gameState.chipsInPot}
-              bigBlind={gameState.bigBlind}
-            />
-            <Players
-              playerList={gameState.playerList}
-              turnIndex={gameState.turnIndex}
-              dealerIndex={gameState.dealerIndex}
-            />
-            <ActionButtons
-              callFunction={callFunction}
-              raiseFunction={raiseFunction}
-              foldFunction={foldFunction}
-            />
-          </div>
-          : <MakeNewGame />
-      }
-    </section>
-  )
+  if (gameState.inProgress) {
+    return (
+      <section className='game'>
+        <GameInfo
+          phase={gameState.phase}
+          pot={gameState.pot}
+          bigBlind={gameState.bigBlind}
+        />
+        <Players
+          players={gameState.players}
+          turn={gameState.turn}
+          dealer={gameState.dealer}
+        />
+        <ActionButtons
+          callFunction={callFunction}
+          raiseFunction={raiseFunction}
+          foldFunction={foldFunction}
+        />
+        <button
+          className='new-game-button'
+          onClick={() => {
+            if (confirm('Are you sure?')) {
+              updateGameState('inProgress', false)
+            } else {
+              return false;
+            }
+          }}
+        >
+          Start a New Game
+        </button>
+      </section>
+    )
+  } else {
+    return (
+      <section className='new-game'>
+        <NewGame
+          gameState={gameState}
+          setGameState={setGameState}
+        />
+      </section>
+    )
+  }
 }

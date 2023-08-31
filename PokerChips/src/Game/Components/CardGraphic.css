@@ -1,0 +1,13 @@
+.card {
+  width: 1em;
+  height: 1.4em;
+  border: 1px solid black;
+}
+
+.open {
+  background-color: black;
+}
+
+.hidden {
+  background-color: white;
+}
