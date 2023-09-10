@@ -11,12 +11,13 @@ export default function Players({
           players.map((player, index) => {
             let isDealer = false;
             let isTurn = false;
+            let isIn = false;
 
             (turn === index) ?
-              isDealer = true :
+              isTurn = true :
               '';
             (dealer === index) ?
-              isTurn = true :
+              isDealer = true :
               '';
             return (
 

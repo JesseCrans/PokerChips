@@ -1,0 +1,9 @@
+.player-list {
+  display: flex;
+  gap: 20px;
+}
+
+.game-info {
+  display: flex;
+  gap: 20px;
+}

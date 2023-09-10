@@ -20,8 +20,8 @@ export default function CardGraphic({ phase }) {
       break;
   }
   let open = [];
-  for (let i = 1; i < 6; i++) {
-    (i < number) ?
+  for (let i = 1; i <= 5; i++) {
+    (i <= number) ?
       open.push(true) :
       open.push(false)
   }
