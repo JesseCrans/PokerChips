@@ -62,8 +62,7 @@ export default function Game() {
     if (
       newPlayersToBet <= 0 && gameState.phase === 3 || // everyone bet in the last phase
       gameState.players.filter((player) => player.in).length <= 1 || // only one player left in round
-      (newPlayersToBet <= 0 && gameState.players.filter((player) => player.in && player.chips > 0).length <= 1) ||
-      gameState.players.filter((player) => player.in && player.chips > 0).length <= 0 // only one player left with chips left
+      (newPlayersToBet <= 0 && gameState.players.filter((player) => player.in && player.chips > 0).length <= 1) // only one player left with chips left
     ) {
       newEndOfRound = true;
     }
@@ -89,9 +88,30 @@ export default function Game() {
         playersToBet: newPlayersToBet,
         playerIsChecking: newPlayerIsChecking,
       });
+      return;
+    } else { // if nothing changed check if the current player is all in and increment the turn if they are
+      const playerChips = gameState.players[gameState.turn].chips;
+      const playerBet = gameState.players[gameState.turn].bet;
+      const playerIn = gameState.players[gameState.turn].in;
+      let newTurn = gameState.turn;
+      if (playerChips <= 0 && playerBet > 0 && playerIn) {
+        let newTurn = nextTurn();
+        newPlayersToBet--;
+      }
+      if (
+        (gameState.turn !== newTurn || gameState.playersToBet !== newPlayersToBet) &&
+        !gameState.endOfRound // don't update the turn if the round is over to prevent infinite loops
+      ) {
+        setGameState({
+          ...gameState,
+          turn: newTurn,
+          playersToBet: newPlayersToBet,
+        });
+        return;
+      }
     }
 
-    // getting game state from session storage
+    // setting game state in session storage
     if (gameState.inProgress) {
       sessionStorage.setItem('gameState', JSON.stringify(gameState));
     }

@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+// TODO: doesnt work properly
+
 export default function RaisingForm({ gameState, setGameState }) {
   const [raiseAmount, setRaiseAmount] = useState(0);
 
@@ -48,7 +50,10 @@ export default function RaisingForm({ gameState, setGameState }) {
         <input
           type="number"
           min={
-            difference + gameState.previousBet
+            Math.min(
+              difference + gameState.previousBet,
+              gameState.players[gameState.turn].chips
+            )
           }
           max={gameState.players[gameState.turn].chips}
           value={raiseAmount}
