@@ -35,33 +35,36 @@ export default function NewGame({ gameState, setGameState }) {
     const newSmallBlind = (newDealer + 1) % newPlayers.length;
     const newBigBlind = (newDealer + 2) % newPlayers.length;
     const newTurn = (newDealer + 3) % newPlayers.length;
+    const newPhase = 0;
     const newRound = 0;
-    const newPot = newGame.bigBlind + Math.round(newGame.bigBlind / 2);
-    const newHighestBet = newGame.bigBlind;
-    const newPreviousBet = newGame.bigBlind;
+    const newBigBlindAmount = parseInt(newGame.bigBlind);
+    const newBigBlindIncrement = parseInt(newGame.bigBlindIncrement);
+    const newBigBlindTurn = parseInt(newGame.bigBlindTurn);
+    const newPot = newBigBlindAmount + Math.round(newBigBlindAmount / 2);
     const newInProgress = true;
 
     // blinds
-    newPlayers[newSmallBlind].bet = Math.round(newGame.bigBlind / 2);
-    newPlayers[newSmallBlind].chips -= Math.round(newGame.bigBlind / 2);
-    newPlayers[newBigBlind].bet = newGame.bigBlind;
-    newPlayers[newBigBlind].chips -= newGame.bigBlind;
+    newPlayers[newSmallBlind].bet = Math.round(newBigBlindAmount / 2);
+    newPlayers[newSmallBlind].chips -= Math.round(newBigBlindAmount / 2);
+    newPlayers[newBigBlind].bet = newBigBlindAmount;
+    newPlayers[newBigBlind].chips -= newBigBlindAmount;
 
     if (newPlayers.length > 1) {
       setGameState({
         ...gameState,
         players: newPlayers,
         playersToBet: newPlayersToBet,
-        bigBlind: newGame.bigBlind,
-        bigBlindIncrement: newGame.bigBlindIncrement,
-        bigBlindTurn: newGame.bigBlindTurn,
+        bigBlind: newBigBlindAmount,
+        bigBlindIncrement: newBigBlindIncrement,
+        bigBlindTurn: newBigBlindTurn,
         pot: newPot,
-        highestBet: newHighestBet,
-        previousBet: newPreviousBet,
+        highestBet: newBigBlindAmount,
+        previousBet: newBigBlindAmount,
         dealer: newDealer,
         turn: newTurn,
         round: newRound,
         inProgress: newInProgress,
+        phase: newPhase,
       });
     } else {
       alert('Minimum 2 players.');
