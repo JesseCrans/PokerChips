@@ -218,14 +218,15 @@ export default function Game() {
   }
 
   // returning the correct component(s)
-  if (gameState.playerIsRaising) {
-    return (
-      <RaisingForm
-        gameState={gameState}
-        setGameState={setGameState}
-      />
-    )
-  } else if (gameState.endOfRound) {
+  // if (gameState.playerIsRaising) {
+  //   return (
+  //     <RaisingForm
+  //       gameState={gameState}
+  //       setGameState={setGameState}
+  //     />
+  //   )
+  // }
+  if (gameState.endOfRound) {
     return (
       <EndOfRound
         gameState={gameState}
@@ -242,6 +243,13 @@ export default function Game() {
   } else if (gameState.inProgress) {
     return (
       <section className='game'>
+        {
+          (gameState.playerIsRaising) ?
+            <RaisingForm
+              gameState={gameState}
+              setGameState={setGameState}
+            /> : ''
+        }
         <GameInfo
           phase={gameState.phase}
           pot={gameState.pot}
