@@ -59,7 +59,6 @@ export default function NewGame({ gameState, setGameState }) {
         bigBlindTurn: newBigBlindTurn,
         pot: newPot,
         highestBet: newBigBlindAmount,
-        previousBet: newBigBlindAmount,
         dealer: newDealer,
         turn: newTurn,
         round: newRound,

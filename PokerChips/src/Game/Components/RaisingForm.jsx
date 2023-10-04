@@ -6,16 +6,27 @@ import GameInfo from "./GameInfo";
 // The minimum raise amount is the same as the previous bet
 
 export default function RaisingForm({ gameState, setGameState }) {
-
   const difference = gameState.highestBet - gameState.players[gameState.turn].bet;
   let nextTurn = (gameState.turn + 1) % gameState.players.length;
   while (!gameState.players[nextTurn].in) {
     nextTurn = (nextTurn + 1) % gameState.players.length;
   }
-  const minRaise = Math.min(difference + gameState.previousBet, gameState.players[gameState.turn].chips);
+  const minRaise = Math.min(difference + gameState.bigBlind, gameState.players[gameState.turn].chips);
   const maxRaise = gameState.players[gameState.turn].chips;
 
   const [raiseAmount, setRaiseAmount] = useState(minRaise); // declare use state here so we can use the minRaise value
+
+  let potFractionsDisabled = [false, false, false, false, false]; // 1/4, 1/2, 3/4, pot, all in
+  let potFractions = []
+  for (let i = 0; i < potFractionsDisabled.length - 1; i++) {
+    let fractionAmount = Math.floor((gameState.pot) * (i + 1) / 4); // calculate from pot with call amount
+    console.log((i + 1) / 4, fractionAmount);
+    potFractions.push(fractionAmount + difference);
+    if (fractionAmount < gameState.bigBlind || fractionAmount + difference > maxRaise) { // if raise is less than big blind or total chips put in exceeds max raise
+      potFractionsDisabled[i] = true;
+    }
+  }
+  potFractions.push(maxRaise);
 
   function handleChange(e) {
     e.preventDefault();
@@ -39,7 +50,6 @@ export default function RaisingForm({ gameState, setGameState }) {
       }),
       pot: gameState.pot + parseInt(raiseAmount),
       highestBet: Math.max(gameState.highestBet, gameState.highestBet + parseInt(raiseAmount) - difference), // what if someone raises less than the difference?
-      previousBet: Math.max(parseInt(raiseAmount) - difference, gameState.previousBet), // we keep the highest bet of the round
       playersToBet: gameState.players.filter(player => player.in).length - 1,
       turn: nextTurn,
       playerIsRaising: false,
@@ -84,12 +94,46 @@ export default function RaisingForm({ gameState, setGameState }) {
         </fieldset>
         <fieldset>
           <legend>Fractions</legend>
-          {/* 
-            The fractions are like:
-            1/4 pot, 1/2 pot, 3/4 pot, pot
-            but of course this should respect the min and max raise amounts
-            so before hand we calculate what 1/4, 1/2, 3/4, and 1 are then if its less than the minRaise we disable the button
-          */}
+          {potFractions.map((fraction, index) => {
+            let fractionString = "";
+            switch (index) {
+              case 0:
+              case 2:
+                fractionString = `${index + 1}/4`;
+                break;
+              case 1:
+                fractionString = `1/2`;
+                break;
+              case 3:
+                fractionString = `Pot`;
+                break;
+              case 4:
+                fractionString = `All in`;
+                break;
+            }
+            if (!potFractionsDisabled[index]) {
+              return (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setRaiseAmount(fraction);
+                  }}
+                >
+                  {fractionString}
+                </button>
+              )
+            }
+            return (
+              <button
+                key={index}
+                disabled={true}
+                title='Big Blind is minimum raise'
+              >
+                {fractionString}
+              </button>
+            )
+          })}
         </fieldset>
         <input type="submit" value="Raise" />
         <button

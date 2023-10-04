@@ -24,9 +24,9 @@ export default function Game() {
     bigBlindTurn: 0,
     pot: 0,
     highestBet: 0,
-    previousBet: 0,
     inProgress: false,
     playerIsChecking: false,
+    playerCanRaise: false,
     playerIsRaising: false,
     endOfRound: false,
     endOfGame: false,
@@ -73,13 +73,18 @@ export default function Game() {
     if (playerDifference <= 0) {
       newPlayerIsChecking = true;
     }
+    let newPlayerCanRaise = false;
+    if (playerDifference < gameState.players[gameState.turn].chips) { // if the call amount is less than the player's chips
+      newPlayerCanRaise = true;
+    }
 
     // update the game state if something changed
     if (
       gameState.phase !== newPhase ||
       gameState.endOfRound !== newEndOfRound ||
       gameState.playersToBet !== newPlayersToBet ||
-      gameState.playerIsChecking !== newPlayerIsChecking
+      gameState.playerIsChecking !== newPlayerIsChecking ||
+      gameState.playerCanRaise !== newPlayerCanRaise
     ) {
       setGameState({
         ...gameState,
@@ -87,6 +92,7 @@ export default function Game() {
         endOfRound: newEndOfRound,
         playersToBet: newPlayersToBet,
         playerIsChecking: newPlayerIsChecking,
+        playerCanRaise: newPlayerCanRaise,
       });
       return;
     } else { // if nothing changed check if the current player is all in and increment the turn if they are
@@ -217,15 +223,6 @@ export default function Game() {
     );
   }
 
-  // returning the correct component(s)
-  // if (gameState.playerIsRaising) {
-  //   return (
-  //     <RaisingForm
-  //       gameState={gameState}
-  //       setGameState={setGameState}
-  //     />
-  //   )
-  // }
   if (gameState.endOfRound) {
     return (
       <EndOfRound
@@ -265,6 +262,7 @@ export default function Game() {
           raiseFunction={raiseFunction}
           foldFunction={foldFunction}
           playerIsChecking={gameState.playerIsChecking}
+          playerCanRaise={gameState.playerCanRaise}
         />
         <div className='debug'>
           <button

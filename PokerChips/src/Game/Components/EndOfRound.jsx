@@ -76,7 +76,6 @@ export default function EndOfRound({ gameState, setGameState }) {
       bigBlind: newBigBlindAmount,
       pot: newPot,
       highestBet: newHighestBet,
-      previousBet: newHighestBet,
       dealer: newDealer,
       phase: newPhase,
       turn: newTurn,

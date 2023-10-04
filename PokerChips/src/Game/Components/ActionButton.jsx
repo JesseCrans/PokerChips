@@ -1,7 +1,7 @@
-export default function ActionButton({ name, handleClick }) {
+export default function ActionButton({ name, handleClick, disabled }) {
   return (
     <li>
-      <button onClick={handleClick}>
+      <button onClick={handleClick} disabled={disabled}>
         {name}
       </button>
     </li>

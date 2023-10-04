@@ -1,9 +1,11 @@
 import ActionButton from "./ActionButton"
 
 export default function ActionButtons({
-  callFunction, raiseFunction, foldFunction, playerIsChecking
+  callFunction, raiseFunction, foldFunction, playerIsChecking, playerCanRaise
 }) {
   let name = playerIsChecking ? 'Check' : 'Call';
+  let disabled = playerCanRaise ? false : true;
+  console.log(disabled);
 
   return (
     <section className="action-buttons">
@@ -18,6 +20,7 @@ export default function ActionButtons({
           name='Raise'
           handleClick={raiseFunction}
           className="button"
+          disabled={disabled}
         />
         <ActionButton
           name='Fold'
