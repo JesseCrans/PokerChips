@@ -1,4 +1,7 @@
-import Player from "./Player"
+// Players handles the displaying of the players in the game
+
+// importing components
+import Player from "./Components/Player/Player"
 
 export default function Players({
   players, turn, dealer
@@ -11,7 +14,6 @@ export default function Players({
           players.map((player, index) => {
             let isDealer = false;
             let isTurn = false;
-            let isIn = false;
 
             (turn === index) ?
               isTurn = true :

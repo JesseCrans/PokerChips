@@ -1,15 +1,18 @@
+// End of Round handles the end of the round
+
+// importing functions
 import { useState, useEffect } from "react"
 
 export default function EndOfRound({ gameState, setGameState }) {
   const [endState, setEndState] = useState({
-    pots: [],
-    winners: [],
-    selectedWinners: [],
-    leftOverPot: 0,
-    leftOverPotGetter: 0
+    pots: [], // array of pot amounts
+    winners: [], // array of arrays of player indexes that can win the pot
+    selectedWinners: [], // array of arrays of booleans that indicate if the player won the pot
+    leftOverPot: 0, // amount of chips left over after the last pot
+    leftOverPotGetter: 0 // index of the player that gets the left over pot
   });
 
-  useEffect(() => {
+  useEffect(() => { // calculate pots when component mounts
     calculatePots();
   }, [])
 
@@ -29,6 +32,7 @@ export default function EndOfRound({ gameState, setGameState }) {
     for (let i = 0; i < endState.selectedWinners.length; i++) {
       // this is the pot amount divided by the number of winners
       const fraction = Math.floor(endState.pots[i] / endState.selectedWinners[i].filter(winner => winner).length);
+      // these are the indexes of winning players in the players array
       const playerIndices = endState.winners[i].filter((winner, index) => endState.selectedWinners[i][index]);
       newPlayers = newPlayers.map((player, playerIndex) => {
         let newPlayer = {
@@ -70,6 +74,7 @@ export default function EndOfRound({ gameState, setGameState }) {
     const newPot = smallBlindPlayerAmount + bigBlindPlayerAmount;
     const newHighestBet = bigBlindPlayerAmount;
 
+    // new state
     const newGameState = {
       players: newPlayers,
       playersToBet: newPlayersToBet,
@@ -90,6 +95,7 @@ export default function EndOfRound({ gameState, setGameState }) {
   }
 
   function handleChange(e) {
+    // handle change of checkbox
     const newSelectedWinners = [...endState.selectedWinners];
     const potIndex = parseInt(e.target.name[0]);
     const playerIndex = parseInt(e.target.name[1]);
@@ -105,6 +111,7 @@ export default function EndOfRound({ gameState, setGameState }) {
     let pots = [];
     let winners = [];
 
+    // if there is only one player left in the round
     if (gameState.players.filter(player => player.in).length === 1) {
       pots.push(gameState.pot);
       winners.push([gameState.players.findIndex(player => player.in)]);
@@ -117,17 +124,22 @@ export default function EndOfRound({ gameState, setGameState }) {
       return;
     }
 
-    while (playerBets.filter(bet => bet > 0).length > 1) {
+    while (playerBets.filter(bet => bet > 0).length > 1) { // continue until all bets are 0 or 1 player left
       let pot = 0;
       let winner = [];
-      const lowestBet = Math.min(
-        ...playerBets.filter((bet, index) => gameState.players[index].in)
-      ) // lowest bet of players still in the game
+      const lowestBet = Math.min( // take lowest bet that is not 0 of players in the round
+        ...playerBets.filter((bet, index) =>
+          gameState.players[index].in &&
+          bet > 0
+        )
+      )
       for (let i = 0; i < playerBets.length; i++) {
         const betAmount = Math.min(playerBets[i], lowestBet);
         playerBets[i] -= betAmount;
         pot += betAmount;
         if (betAmount > 0 && gameState.players[i].in) {
+          // if the player has chips in the pot and is still in the round
+          // the player can win the pot
           winner.push(i);
         }
       }

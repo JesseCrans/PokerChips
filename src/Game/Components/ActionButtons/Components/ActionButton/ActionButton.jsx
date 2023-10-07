@@ -1,3 +1,5 @@
+// ActionButton handles the individual action button
+
 export default function ActionButton({ name, handleClick, disabled }) {
   return (
     <li>

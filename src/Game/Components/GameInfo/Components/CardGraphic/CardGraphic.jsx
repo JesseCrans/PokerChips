@@ -1,3 +1,6 @@
+// CardGraphic handles the displaying of the cards in the round
+
+// import style
 import './CardGraphic.css'
 
 export default function CardGraphic({ phase }) {

@@ -1,3 +1,6 @@
+// NewPlayers handles the adding of new players to a new game
+
+// importing functions
 import { useState } from "react"
 
 export default function NewPlayers({ playerNames, updateNewGame }) {

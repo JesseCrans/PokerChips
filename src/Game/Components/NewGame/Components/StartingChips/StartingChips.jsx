@@ -1,3 +1,5 @@
+// Starting chips component handles the setting of the starting chips
+
 export default function StartingChips({ startingChips, updateNewGame }) {
   function handleChange(e) {
     updateNewGame(

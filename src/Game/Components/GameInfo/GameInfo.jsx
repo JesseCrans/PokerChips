@@ -1,4 +1,7 @@
-import CardGraphic from "./CardGraphic"
+// GameInfo handles the displaying of the game info
+
+// import components
+import CardGraphic from "./Components/CardGraphic/CardGraphic"
 
 export default function GameInfo({
   phase,

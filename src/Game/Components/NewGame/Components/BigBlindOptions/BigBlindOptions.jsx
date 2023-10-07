@@ -1,3 +1,5 @@
+// BigBlindOptions handles the setting of the big blind options at the start of the game
+
 export default function BigBlindOptions({
   bigBlind,
   bigBlindIncrement,

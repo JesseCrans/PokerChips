@@ -1,35 +1,37 @@
 import './Game.css'
 
-import GameInfo from './Components/GameInfo';
-import Players from './Components/Players';
-import ActionButtons from './Components/ActionButtons';
-import NewGame from './Components/NewGame';
-import RaisingForm from './Components/RaisingForm';
-import EndOfRound from './Components/EndOfRound';
-import EndOfGame from './Components/EndOfGame';
+// import components
+import GameInfo from './Components/GameInfo/GameInfo';
+import Players from './Components/Players/Players';
+import ActionButtons from './Components/ActionButtons/ActionButtons';
+import NewGame from './Components/NewGame/NewGame';
+import RaisingForm from './Components/RaisingForm/RaisingForm';
+import EndOfRound from './Components/EndOfRound/EndOfRound';
+import EndOfGame from './Components/EndOfGame/EndOfGame';
 
+// import functions
 import { useState, useEffect } from 'react'
 
 export default function Game() {
   const initialGameState = JSON.parse(sessionStorage.getItem('gameState')) ||
   {
-    players: [],
-    playersToBet: 0,
-    turn: 0,
-    dealer: 0,
-    round: 0,
-    phase: 0,
-    bigBlind: 0,
-    bigBlindIncrement: 0,
-    bigBlindTurn: 0,
-    pot: 0,
-    highestBet: 0,
-    inProgress: false,
-    playerIsChecking: false,
-    playerCanRaise: false,
-    playerIsRaising: false,
-    endOfRound: false,
-    endOfGame: false,
+    players: [], // list of players
+    playersToBet: 0, // number of players that still need to bet in the round
+    turn: 0, // index of the player whose turn it is
+    dealer: 0, // index of the dealer
+    round: 0, // number of rounds played
+    phase: 0, // phase of the current round
+    bigBlind: 0, // amount of the big blind
+    bigBlindIncrement: 0, // amount the big blind increases whenever it is increased
+    bigBlindTurn: 0, // number of rounds between big blind increases
+    pot: 0, // amount of chips in the pot
+    highestBet: 0, // highest bet in the round
+    inProgress: false, // whether or not the game is in progress
+    playerIsChecking: false, // whether or not the current player is checking
+    playerCanRaise: false, // whether or not the current player can raise
+    playerIsRaising: false, // whether or not the current player is raising
+    endOfRound: false, // whether or not the round is over
+    endOfGame: false, // whether or not the game is over
   };
   const [gameState, setGameState] = useState(initialGameState);
 
@@ -37,7 +39,7 @@ export default function Game() {
   useEffect(() => {
     if (gameState.inProgress === false) {
       return;
-    }
+    } // don't do anything if the game isn't in progress
 
     if (gameState.players.length <= 1) {
       if (gameState.endOfGame === false) {
@@ -47,7 +49,7 @@ export default function Game() {
         })
       }
       return;
-    }
+    } // end game if there is only one player left
 
     // increase phase if all players have bet
     let newPhase = gameState.phase;
@@ -62,21 +64,33 @@ export default function Game() {
     if (
       newPlayersToBet <= 0 && gameState.phase === 3 || // everyone bet in the last phase
       gameState.players.filter((player) => player.in).length <= 1 || // only one player left in round
-      (newPlayersToBet <= 0 && gameState.players.filter((player) => player.in && player.chips > 0).length <= 1) // only one player left with chips left
+      (newPlayersToBet <= 0 && gameState.players.filter((player) => player.in && player.chips > 0).length <= 1) || // only one player left with chips left
+      gameState.players.filter(player => player.in && player.chips > 0).length <= 0 // no players with chips left
     ) {
       newEndOfRound = true;
     }
 
-    // check if the next player is checking
+    // check if the next player is checking or calling
     const playerDifference = gameState.highestBet - gameState.players[gameState.turn].bet;
     let newPlayerIsChecking = false;
     if (playerDifference <= 0) {
       newPlayerIsChecking = true;
     }
+
+    // check if the next player is able to raise
     let newPlayerCanRaise = false;
     if (playerDifference < gameState.players[gameState.turn].chips) { // if the call amount is less than the player's chips
       newPlayerCanRaise = true;
     }
+
+    // log the game state for debugging
+    // console.log(
+    //   gameState.phase !== newPhase,
+    //   gameState.endOfRound !== newEndOfRound,
+    //   gameState.playersToBet !== newPlayersToBet,
+    //   gameState.playerIsChecking !== newPlayerIsChecking,
+    //   gameState.playerCanRaise !== newPlayerCanRaise
+    // )
 
     // update the game state if something changed
     if (
@@ -95,16 +109,18 @@ export default function Game() {
         playerCanRaise: newPlayerCanRaise,
       });
       return;
-    } else { // if nothing changed check if the current player is all in and increment the turn if they are
+    } else { // advance turn if player is all in
       const playerChips = gameState.players[gameState.turn].chips;
       const playerBet = gameState.players[gameState.turn].bet;
       const playerIn = gameState.players[gameState.turn].in;
       let newTurn = gameState.turn;
-      if (playerChips <= 0 && playerBet > 0 && playerIn) {
+
+      if (playerChips <= 0 && playerBet > 0 && playerIn) { // if the player is all in
         let newTurn = nextTurn();
         newPlayersToBet--;
       }
-      if (
+
+      if ( // if something has changed
         (gameState.turn !== newTurn || gameState.playersToBet !== newPlayersToBet) &&
         !gameState.endOfRound // don't update the turn if the round is over to prevent infinite loops
       ) {
@@ -118,12 +134,15 @@ export default function Game() {
     }
 
     // setting game state in session storage
+    // this has to be done loop after the update to game state
+    // since the game state is updated asynchronously
     if (gameState.inProgress) {
       sessionStorage.setItem('gameState', JSON.stringify(gameState));
     }
   }, [gameState])
 
   function nextTurn() {
+    // calculate the next turn
     let nextTurn = (gameState.turn + 1) % gameState.players.length;
     while (!gameState.players[nextTurn].in) {
       nextTurn = (nextTurn + 1) % gameState.players.length;
@@ -134,11 +153,12 @@ export default function Game() {
   function callFunction() {
     // handle the call or check
 
-    // update the player's bet and chips
+    // calculate the difference between the highest bet and the player's bet
     let difference = gameState.highestBet - gameState.players[gameState.turn].bet;
     if (difference > gameState.players[gameState.turn].chips) {
       difference = gameState.players[gameState.turn].chips;
     }
+
     const newPlayers = gameState.players.map((player, index) => {
       if (index === gameState.turn) {
         return ({
@@ -150,14 +170,9 @@ export default function Game() {
       return player;
     });
 
-    // update the pot
-    const newPot = gameState.pot + difference;
-
-    // decrease playersToBet
-    const newPlayersToBet = gameState.playersToBet - 1;
-
-    // increase turn
-    const newTurn = nextTurn();
+    const newPot = gameState.pot + difference; // update the pot
+    const newPlayersToBet = gameState.playersToBet - 1; // decrease playersToBet
+    const newTurn = nextTurn(); // increase turn
 
     // update the game state
     setGameState({
@@ -178,7 +193,7 @@ export default function Game() {
 
   function raiseFunction() {
     // raising set to true
-    // raise it handled in the raising form component
+    // raising handled in the raising form component
 
     // update the game state
     setGameState({
@@ -202,11 +217,8 @@ export default function Game() {
       }
     });
 
-    // decrease playersToBet
-    const newPlayersToBet = gameState.playersToBet - 1;
-
-    // increase turn
-    const newTurn = nextTurn();
+    const newPlayersToBet = gameState.playersToBet - 1; // decrease playersToBet
+    const newTurn = nextTurn(); // increase turn
 
     // update the game state
     setGameState({
@@ -223,25 +235,25 @@ export default function Game() {
     );
   }
 
-  if (gameState.endOfRound) {
+  if (gameState.endOfRound) { // render end of round component
     return (
       <EndOfRound
         gameState={gameState}
         setGameState={setGameState}
       />
     )
-  } else if (gameState.endOfGame) {
+  } else if (gameState.endOfGame) { // render end of game component
     return (
       <EndOfGame
         gameState={gameState}
         setGameState={setGameState}
       />
     )
-  } else if (gameState.inProgress) {
+  } else if (gameState.inProgress) { // render game component
     return (
       <section className='game'>
         {
-          (gameState.playerIsRaising) ?
+          (gameState.playerIsRaising) ? // render raising form if player is raising
             <RaisingForm
               gameState={gameState}
               setGameState={setGameState}
@@ -264,13 +276,13 @@ export default function Game() {
           playerIsChecking={gameState.playerIsChecking}
           playerCanRaise={gameState.playerCanRaise}
         />
-        <div className='debug'>
+        {/* <div className='debug'>
           <button
             onClick={() => console.log(gameState)}
           >
             Debug Info
           </button>
-        </div>
+        </div> */}
         <button
           className='new-game-button'
           onClick={() => {
@@ -288,7 +300,7 @@ export default function Game() {
         </button>
       </section>
     )
-  } else {
+  } else { // render new game component if game is not in progress
     return (
       <section className='new-game'>
         <NewGame

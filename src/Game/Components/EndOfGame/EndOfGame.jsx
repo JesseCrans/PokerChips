@@ -1,3 +1,5 @@
+// EndOfGame handles the end of the game
+
 export default function EndOfGame({ gameState, setGameState }) {
   return (
     <section className='end-of-game'>

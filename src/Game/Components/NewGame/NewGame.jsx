@@ -1,11 +1,16 @@
+// NewGame handles the creation of a new game
+
+// importing functions
 import { useState } from "react"
-import NewPlayers from "./NewPlayers"
-import StartingChips from "./StartingChips"
-import BigBlindOptions from "./BigBlindOptions"
+
+// importing components
+import NewPlayers from "./Components/NewPlayers/NewPlayers"
+import StartingChips from "./Components/StartingChips/StartingChips"
+import BigBlindOptions from "./Components/BigBlindOptions/BigBlindOptions"
 
 export default function NewGame({ gameState, setGameState }) {
   let [newGame, setNewGame] = useState({
-    playerNames: ['Test 1', 'Test 2', 'Test 3', 'Test 4'],
+    playerNames: [''],
     startingChips: 5000,
     bigBlind: 50,
     bigBlindIncrement: 50,

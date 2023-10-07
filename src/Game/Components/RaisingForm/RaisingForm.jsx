@@ -1,32 +1,29 @@
-import { useState } from "react"
-import GameInfo from "./GameInfo";
+// Raising Form handles the raising of the players bet
 
-// TODO: doesnt work properly
-// So the rules are:
-// The minimum raise amount is the same as the previous bet
+// importing functions
+import { useState } from "react"
 
 export default function RaisingForm({ gameState, setGameState }) {
-  const difference = gameState.highestBet - gameState.players[gameState.turn].bet;
-  let nextTurn = (gameState.turn + 1) % gameState.players.length;
+  const difference = gameState.highestBet - gameState.players[gameState.turn].bet; // calculate the difference between the highest bet and the current bet
+  let nextTurn = (gameState.turn + 1) % gameState.players.length; // calculate the next turn
   while (!gameState.players[nextTurn].in) {
     nextTurn = (nextTurn + 1) % gameState.players.length;
   }
-  const minRaise = Math.min(difference + gameState.bigBlind, gameState.players[gameState.turn].chips);
-  const maxRaise = gameState.players[gameState.turn].chips;
+  const minRaise = Math.min(difference + gameState.bigBlind, gameState.players[gameState.turn].chips); // calculate the minimum raise
+  const maxRaise = gameState.players[gameState.turn].chips; // calculate the maximum raise
 
   const [raiseAmount, setRaiseAmount] = useState(minRaise); // declare use state here so we can use the minRaise value
 
   let potFractionsDisabled = [false, false, false, false, false]; // 1/4, 1/2, 3/4, pot, all in
-  let potFractions = []
+  let potFractions = [];
   for (let i = 0; i < potFractionsDisabled.length - 1; i++) {
     let fractionAmount = Math.floor((gameState.pot) * (i + 1) / 4); // calculate from pot with call amount
-    console.log((i + 1) / 4, fractionAmount);
-    potFractions.push(fractionAmount + difference);
+    potFractions.push(fractionAmount + difference); // add difference to get raise amount
     if (fractionAmount < gameState.bigBlind || fractionAmount + difference > maxRaise) { // if raise is less than big blind or total chips put in exceeds max raise
       potFractionsDisabled[i] = true;
     }
   }
-  potFractions.push(maxRaise);
+  potFractions.push(maxRaise); // add all in to the end of the array
 
   function handleChange(e) {
     e.preventDefault();

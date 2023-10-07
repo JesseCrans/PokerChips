@@ -1,11 +1,13 @@
-import ActionButton from "./ActionButton"
+// ActionButtons component handles the action buttons for the player, calling, raising, and folding
+
+// importing components
+import ActionButton from "./Components/ActionButton/ActionButton"
 
 export default function ActionButtons({
   callFunction, raiseFunction, foldFunction, playerIsChecking, playerCanRaise
 }) {
   let name = playerIsChecking ? 'Check' : 'Call';
   let disabled = playerCanRaise ? false : true;
-  console.log(disabled);
 
   return (
     <section className="action-buttons">
