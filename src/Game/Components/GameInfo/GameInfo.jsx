@@ -22,11 +22,11 @@ export default function GameInfo({
       </div>
       <div className="pot">
         <h3>Pot</h3>
-        <p>${pot}</p>
+        <p title="Pot">💰: ${pot}</p>
       </div>
       <div className="big-blind">
         <h3>Big Blind</h3>
-        <p>${bigBlind}</p>
+        <p title="Big Blind">🪙: ${bigBlind}</p>
       </div>
     </section>
   )

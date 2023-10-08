@@ -1,10 +1,10 @@
 .players {
-  position: absolute;
   width: 100%;
   height: 100%;
-  max-width: 1200px;
+  max-width: 800px;
+  min-height: 600px;
+  position: absolute;
   display: flex;
-  z-index: -999;
 }
 
 .players>h2 {
@@ -14,12 +14,10 @@
 .player-list-left,
 .player-list-right {
   display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
-  margin: 0;
-  padding: 10px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .player-list-left {
@@ -30,62 +28,87 @@
   align-items: flex-end;
 }
 
+@media (min-width: 801px) {
+
+  .player-list-left,
+  .player-list-right {
+    width: 50%;
+    height: 100%;
+    top: 0;
+    flex-direction: column;
+  }
+
+  .player-list-left {
+    left: 0;
+  }
+
+  .player-list-right {
+    right: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .players {
+    flex-direction: column;
+    max-height: 800px;
+  }
+
+  .player-list-left,
+  .player-list-right {
+    width: 100%;
+    height: 50%;
+    left: 0;
+  }
+
+  .player-list-left {
+    top: 0;
+  }
+
+  .player-list-right {
+    bottom: 0;
+  }
+}
+
 .player {
   position: relative;
+  width: 120px;
+  height: 120px;
+  border: 1px solid black;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 12rem;
-  height: 12rem;
 }
 
-.player>h4 {
-  font-size: xx-large;
-  overflow: hidden;
-}
-
-.player>p,
-.player>h4 {
+.player p,
+.player h4 {
   margin: 0;
-  padding: 0;
+  cursor: default;
+  font-size: 1.25em;
 }
 
-.player>p:first-of-type::before {
-  content: "💰:$"
-}
-
-.player>p:last-of-type::before {
-  content: "🪙:$"
-}
-
-.out {
-  color: rgb(186, 186, 186);
-}
-
-.turn {
-  border: 5px solid black;
-}
-
-.player>div:first-of-type {
+.dealer-button {
   position: absolute;
-  top: 90%;
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
+  top: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 30px;
 }
 
-.player-list-left>.player>div:first-of-type {
-  left: 90%;
+.player-list-left .dealer-button {
+  left: 85%;
 }
 
-.player-list-right>.player>div:first-of-type {
-  right: 90%;
+.player-list-right .dealer-button {
+  right: 85%;
+}
+
+@media (max-width: 800px) {
+
+  .player-list-right .dealer-button {
+    right: -15%;
+    top: -15%;
+  }
 }

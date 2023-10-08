@@ -1,19 +1,3 @@
-@media (orientation: landscape) {
-  .game-info {
-    /* making circle */
-    aspect-ratio: 1 / 1;
-    height: 60%;
-  }
-}
-
-@media (orientation: portrait) {
-  .game-info {
-    /* making circle */
-    aspect-ratio: 1 / 1;
-    width: 60%;
-  }
-}
-
 .game-info {
   border: 1px solid black;
   border-radius: 50%;
@@ -21,37 +5,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  width: 350px;
+  height: 350px;
+  min-height: 350px;
+  z-index: 2;
 }
 
-.game-info>h2 {
+.game-info h3,
+.game-info h2 {
   display: none;
 }
 
-.pot,
-.big-blind {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-size: xx-large;
-}
-
-.pot>h3,
-.big-blind>h3,
-.card-graphic>h3 {
-  display: none;
-}
-
-.pot>p,
-.big-blind>p {
+.game-info p {
   margin: 0;
-  padding: 0;
+  margin-top: 5px;
+  cursor: default;
 }
 
-.pot>p::before {
-  content: "💰: "
+.pot {
+  font-size: 3em;
 }
 
-.big-blind>p::before {
-  content: "🪙: "
+.big-blind {
+  font-size: 1.5em;
+}
+
+@media (max-width: 800px) {
+  .game-info {
+    width: 250px;
+    height: 250px;
+    min-height: 250px;
+  }
+
+  .pot {
+    font-size: 2em;
+  }
+
+  .big-blind {
+    font-size: 1em;
+  }
 }

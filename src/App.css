@@ -1,8 +1,11 @@
-.content>nav {
+.content {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
+  align-items: flex-start;
+}
+
+.content nav {
+  z-index: 1;
 }

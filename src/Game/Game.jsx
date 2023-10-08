@@ -283,7 +283,7 @@ export default function Game() {
             Debug Info
           </button>
         </div> */}
-        <button
+        {/* <button
           className='new-game-button'
           onClick={() => {
             if (confirm('Are you sure?')) {
@@ -297,7 +297,7 @@ export default function Game() {
           }}
         >
           Start a New Game
-        </button>
+        </button> */}
       </section>
     )
   } else { // render new game component if game is not in progress

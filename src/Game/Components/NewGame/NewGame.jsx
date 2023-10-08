@@ -10,7 +10,7 @@ import BigBlindOptions from "./Components/BigBlindOptions/BigBlindOptions"
 
 export default function NewGame({ gameState, setGameState }) {
   let [newGame, setNewGame] = useState({
-    playerNames: [''],
+    playerNames: ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5'],
     startingChips: 5000,
     bigBlind: 50,
     bigBlindIncrement: 50,

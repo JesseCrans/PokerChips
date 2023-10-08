@@ -9,7 +9,7 @@ import "./ActionButtons.css";
 export default function ActionButtons({
   callFunction, raiseFunction, foldFunction, playerIsChecking, playerCanRaise
 }) {
-  let name = playerIsChecking ? 'Check' : 'Call';
+  let name = playerIsChecking ? '✔️' : '📞';
   let disabled = playerCanRaise ? false : true;
 
   return (
@@ -18,19 +18,19 @@ export default function ActionButtons({
       <ul className="button-list">
         <ActionButton
           name={name}
+          title={playerIsChecking ? 'Check' : 'Call'}
           handleClick={callFunction}
-          className="button"
         />
         <ActionButton
-          name='Raise'
+          name='📈'
+          title='Raise'
           handleClick={raiseFunction}
-          className="button"
           disabled={disabled}
         />
         <ActionButton
-          name='Fold'
+          name='❌'
+          title='Fold'
           handleClick={foldFunction}
-          className="button"
         />
       </ul>
     </section>

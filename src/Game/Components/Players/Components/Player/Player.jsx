@@ -16,12 +16,12 @@ export default function Player({ player, isDealer, isTurn }) {
 
   return (
     <li className={className}>
-      {isDealer ? <div>D</div> : ''}
+      {isDealer ? <div className="dealer-button">🤵</div> : ''}
       <h4>
         {player.name}
       </h4>
-      <p>{player.chips}</p>
-      <p>{player.bet}</p>
+      <p title="Chips">💰: ${player.chips}</p>
+      <p title="Bet">🪙: ${player.bet}</p>
     </li>
   )
 }
