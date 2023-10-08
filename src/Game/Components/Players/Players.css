@@ -1,0 +1,91 @@
+.players {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  display: flex;
+  z-index: -999;
+}
+
+.players>h2 {
+  display: none;
+}
+
+.player-list-left,
+.player-list-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.player-list-left {
+  align-items: flex-start;
+}
+
+.player-list-right {
+  align-items: flex-end;
+}
+
+.player {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 12rem;
+  height: 12rem;
+}
+
+.player>h4 {
+  font-size: xx-large;
+  overflow: hidden;
+}
+
+.player>p,
+.player>h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.player>p:first-of-type::before {
+  content: "💰:$"
+}
+
+.player>p:last-of-type::before {
+  content: "🪙:$"
+}
+
+.out {
+  color: rgb(186, 186, 186);
+}
+
+.turn {
+  border: 5px solid black;
+}
+
+.player>div:first-of-type {
+  position: absolute;
+  top: 90%;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-list-left>.player>div:first-of-type {
+  left: 90%;
+}
+
+.player-list-right>.player>div:first-of-type {
+  right: 90%;
+}

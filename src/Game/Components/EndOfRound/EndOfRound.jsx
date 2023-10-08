@@ -1,5 +1,7 @@
 // End of Round handles the end of the round
 
+// TODO: pot calculation still does not work correctly
+
 // importing functions
 import { useState, useEffect } from "react"
 

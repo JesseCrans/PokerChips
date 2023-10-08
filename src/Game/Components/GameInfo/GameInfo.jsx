@@ -3,6 +3,9 @@
 // import components
 import CardGraphic from "./Components/CardGraphic/CardGraphic"
 
+// import style
+import "./GameInfo.css"
+
 export default function GameInfo({
   phase,
   pot,
@@ -21,7 +24,7 @@ export default function GameInfo({
         <h3>Pot</h3>
         <p>${pot}</p>
       </div>
-      <div className="big blind">
+      <div className="big-blind">
         <h3>Big Blind</h3>
         <p>${bigBlind}</p>
       </div>

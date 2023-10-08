@@ -1,0 +1,31 @@
+.action-buttons>h2 {
+  display: none;
+}
+
+.action-buttons {
+  padding: 10px;
+}
+
+.button-list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.button-list>li>button {
+  width: 5rem;
+  height: 5rem;
+  font-size: large;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.button-list>li>button:hover {
+  background-color: #e6e6e6;
+}

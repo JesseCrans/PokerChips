@@ -2,30 +2,26 @@
 
 export default function Player({ player, isDealer, isTurn }) {
   // setting player color based on if they are in the round
-  let style = {
-    color: 'black'
-  }
+
+  let className = "player";
   if (!player.in) {
-    style = {
-      color: 'gray'
-    }
+    className += " out";
+  }
+  if (isDealer) {
+    className += " dealer";
+  }
+  if (isTurn) {
+    className += " turn";
   }
 
   return (
-    <li className="player" style={style}>
+    <li className={className}>
+      {isDealer ? <div>D</div> : ''}
       <h4>
         {player.name}
-        {
-          (isDealer) ?
-            ' (D)' : ''
-        }
-        {
-          (isTurn) ?
-            ' <=' : ''
-        }
       </h4>
-      <p>Chips: ${player.chips}</p>
-      <p>Bet: ${player.bet}</p>
+      <p>{player.chips}</p>
+      <p>{player.bet}</p>
     </li>
   )
 }

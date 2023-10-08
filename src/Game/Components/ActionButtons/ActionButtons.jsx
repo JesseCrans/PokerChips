@@ -3,6 +3,9 @@
 // importing components
 import ActionButton from "./Components/ActionButton/ActionButton"
 
+// importing style
+import "./ActionButtons.css";
+
 export default function ActionButtons({
   callFunction, raiseFunction, foldFunction, playerIsChecking, playerCanRaise
 }) {
