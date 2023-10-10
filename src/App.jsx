@@ -1,10 +1,20 @@
 import './App.css'
 import Game from './Game/Game'
 
+import { useState } from 'react'
+
 function App() {
+  const [buttonText, setButtonText] = useState('>');
+  const [navClassName, setNavClassName] = useState('show');
+
+  function showMenu() {
+    setNavClassName(navClassName === 'show' ? '' : 'show'); // toggle nav class
+    setButtonText(buttonText === '>' ? '<' : '>'); // toggle button text
+  }
+
   return (
     <main className='content'>
-      <nav>
+      <nav className={navClassName}>
         <h1 className='title'>CHIPPIES</h1>
         <button
           className='clear-storage'
@@ -15,7 +25,14 @@ function App() {
             }
           }} // clear session storage and reload page
         >
-          Clear Storage
+          New Game
+        </button>
+        <button
+          name='show-menu'
+          className='show-menu'
+          onClick={showMenu}
+        >
+          {buttonText}
         </button>
       </nav>
       <Game />
