@@ -14,6 +14,7 @@
 
 .player-list-left,
 .player-list-right {
+  position: relative;
   display: flex;
   justify-content: space-evenly;
   list-style: none;
@@ -60,6 +61,7 @@
     height: 50%;
     max-height: 300px;
     left: 0;
+    overflow: hidden;
   }
 
   .player-list-left {

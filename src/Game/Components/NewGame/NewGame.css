@@ -8,7 +8,7 @@
 }
 
 .new-game>h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .new-game-form {
@@ -19,8 +19,24 @@
   justify-content: center;
 }
 
+.new-game-form>input {
+  width: 60%;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 10px 0;
+  text-align: center;
+  background-color: white;
+}
+
+.new-game-form>input:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
 .new-game fieldset {
-  width: 50%;
+  width: 60%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -31,7 +47,7 @@
 }
 
 .new-game fieldset>legend {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
@@ -40,9 +56,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 9.5rem;
+  height: 7.5rem;
   overflow: scroll;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .new-player-list>li {
@@ -51,7 +67,7 @@
 
 .new-player-list input {
   width: 95%;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1rem;
@@ -61,9 +77,8 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  margin: 10px 0;
 }
 
 .add-new-player,
@@ -77,20 +92,13 @@
   align-items: center;
   font-size: 1.5rem;
   background-color: white;
+  margin: 0 5px;
 }
 
 .add-new-player:hover,
 .remove-new-player:hover {
   cursor: pointer;
   background-color: lightgray;
-}
-
-.starting-chips label {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .big-blind-options {
@@ -100,7 +108,8 @@
   align-items: center;
 }
 
-.big-blind-options label {
+.big-blind-options label,
+.starting-chips label {
   width: 100%;
   font-size: 1.2rem;
   font-weight: bold;
@@ -108,7 +117,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 
 .big-blind-options input,
@@ -117,5 +126,5 @@
   padding: 10px;
   border: 1px solid black;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 0.75rem;
 }

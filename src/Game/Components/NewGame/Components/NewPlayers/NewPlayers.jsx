@@ -58,13 +58,13 @@ export default function NewPlayers({ playerNames, updateNewGame }) {
           className="add-new-player"
           onClick={handleAddPlayer}
         >
-          +
+          🙋
         </button>
         <button
           className="remove-new-player"
           onClick={handleRemovePlayer}
         >
-          -
+          🙅
         </button>
       </div>
     </fieldset>

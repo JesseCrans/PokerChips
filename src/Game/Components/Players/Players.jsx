@@ -9,6 +9,7 @@ import "./Players.css"
 export default function Players({
   players, turn, dealer
 }) {
+  // make left and right player lists state variables
   return (
     <section className="players">
       <h2>Players</h2>
@@ -29,7 +30,7 @@ export default function Players({
 
                 <Player
                   player={player}
-                  key={player.name}
+                  key={player.name + index}
                   isDealer={isDealer}
                   isTurn={isTurn}
                 />
@@ -54,7 +55,7 @@ export default function Players({
               return (
                 <Player
                   player={player}
-                  key={player.name}
+                  key={player.name + index}
                   isDealer={isDealer}
                   isTurn={isTurn}
                 />
