@@ -8,6 +8,9 @@ import NewPlayers from "./Components/NewPlayers/NewPlayers"
 import StartingChips from "./Components/StartingChips/StartingChips"
 import BigBlindOptions from "./Components/BigBlindOptions/BigBlindOptions"
 
+// importing styles
+import "./NewGame.css"
+
 export default function NewGame({ gameState, setGameState }) {
   let [newGame, setNewGame] = useState({
     playerNames: ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5'],

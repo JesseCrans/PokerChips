@@ -6,7 +6,7 @@ import { useState } from "react"
 export default function NewPlayers({ playerNames, updateNewGame }) {
   function handleChange(e) {
     let newPlayers = [...playerNames];
-    newPlayers[e.target.name] = e.target.value;
+    newPlayers[e.target.name] = e.target.value.slice(0, 10);
 
     updateNewGame(
       'playerNames',
@@ -53,18 +53,20 @@ export default function NewPlayers({ playerNames, updateNewGame }) {
           )
         }
       </ol>
-      <button
-        className="add-new-player"
-        onClick={handleAddPlayer}
-      >
-        Add Player
-      </button>
-      <button
-        className="remove-new-player"
-        onClick={handleRemovePlayer}
-      >
-        Remove Player
-      </button>
+      <div className="new-player-buttons">
+        <button
+          className="add-new-player"
+          onClick={handleAddPlayer}
+        >
+          +
+        </button>
+        <button
+          className="remove-new-player"
+          onClick={handleRemovePlayer}
+        >
+          -
+        </button>
+      </div>
     </fieldset>
   )
 }

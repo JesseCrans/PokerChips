@@ -17,10 +17,10 @@ export default function BigBlindOptions({
   return (
     <fieldset className="big-blind-options">
       <legend>Big Blind Options</legend>
-      <label>
-        <p>
-          Big Blind:
-        </p>
+      <label
+        title='Big Blind amount'
+      >
+        🪙
         <input
           type="number"
           name='bigBlind'
@@ -30,10 +30,10 @@ export default function BigBlindOptions({
           max={startingChips}
         />
       </label>
-      <label>
-        <p>
-          Big Blind Increment:
-        </p>
+      <label
+        title='Big Blind Increment'
+      >
+        🪙📈
         <input
           type="number"
           name='bigBlindIncrement'
@@ -42,10 +42,10 @@ export default function BigBlindOptions({
           min={0}
         />
       </label>
-      <label>
-        <p>
-          Big Blind increases after this many rounds.
-        </p>
+      <label
+        title="Big Blind increases after this many turns"
+      >
+        ⌛
         <input
           type="number"
           name='bigBlindTurn'
