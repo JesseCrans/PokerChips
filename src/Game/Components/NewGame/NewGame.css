@@ -7,16 +7,18 @@
   padding: 10px;
 
   /* style */
-  background-color: white;
-  border: 1px solid black;
+  background-color: rgb(24, 26, 27);
+  color: lightgray;
+  border: 1px solid gray;
   border-radius: 20px;
-  box-shadow: -10px 10px 10px black;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
 .new-game-title {
-  margin: 25px;
+  margin: 25px 0 0 0;
+  text-align: center;
 }
 
 .new-game-form {
@@ -38,50 +40,53 @@
   padding: 20px;
 
   /* style */
+  border-color: gray;
   border-radius: 10px;
 }
 
 .new-game input,
 .start-new-game {
-  /* size */
   width: 100%;
-  /* height: 2rem; */
   margin: 5px;
   padding: 10px;
-
-  /* style */
-  /* border: 1px solid black; */
   border-radius: 5px;
   font-size: 1rem;
+  background-color: rgb(24, 26, 27);
+  color: lightgray;
+  border-color: gray;
 }
 
 .new-player-buttons {
-  /* display */
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-
-  /* size */
   width: 100%;
 }
 
 .add-new-player,
 .remove-new-player {
-  /* size */
   width: 40%;
   height: 2rem;
   margin: 5px;
   padding: 5px;
-
-  /* style */
   border-radius: 5px;
+  background-color: rgb(24, 26, 27);
+  color: lightgray;
+  border-color: gray;
 }
 
-.starting-chips-input,
+.add-new-player:hover,
+.remove-new-player:hover,
+.start-new-game:hover {
+  cursor: pointer;
+  background-color: rgb(50, 52, 53);
+}
+
+/* .starting-chips-input,
 .big-blind-options input {
   text-align: right;
-}
+} */
 
 .big-blind-options {
   display: flex;

@@ -23,7 +23,7 @@ export default function BigBlindOptions({
         title='Big Blind amount'
       >
         <p>
-          Big Blind
+          Big Blind starting amount:
         </p>
         <input
           type="number"
@@ -32,13 +32,14 @@ export default function BigBlindOptions({
           value={bigBlind}
           min={0}
           max={startingChips}
+          step={50}
         />
       </label>
       <label
         title='Big Blind Increment'
       >
         <p>
-          Increase amount
+          Increase amount:
         </p>
         <input
           type="number"
@@ -46,13 +47,14 @@ export default function BigBlindOptions({
           onChange={handleChange}
           value={bigBlindIncrement}
           min={0}
+          step={50}
         />
       </label>
       <label
         title="Big Blind increases after this many turns"
       >
         <p>
-          Increase interval
+          Increase interval (turns):
         </p>
         <input
           type="number"
@@ -60,6 +62,7 @@ export default function BigBlindOptions({
           onChange={handleChange}
           value={bigBlindTurn}
           min={0}
+          step={1}
         />
       </label>
     </fieldset>

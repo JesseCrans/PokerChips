@@ -20,6 +20,7 @@ export default function StartingChips({ startingChips, updateNewGame }) {
           value={startingChips}
           name="starting-chips-input"
           className="starting-chips-input"
+          step={1000}
         />
       </label>
     </fieldset>
