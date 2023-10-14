@@ -1,79 +1,52 @@
-.content {
+.main-content {
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 10px;
-  z-index: 4;
+  background-color: white;
+  box-shadow: 0 0 10px black;
 }
 
-nav>h1 {
-  font-size: 3rem;
+.website-title {
   margin: 10px;
-  margin-bottom: 0;
+  padding: 0;
+  font-size: 2rem;
 }
 
-.clear-storage {
-  background: white;
-  border: 1px solid black;
+.make-new-game {
+  width: 2rem;
+  height: 2rem;
+  margin: 10px;
   padding: 5px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-.clear-storage:hover {
-  background: lightgray;
-  cursor: pointer;
+  font-size: 1rem;
 }
 
 .show-menu {
   display: none;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
   border: 1px solid black;
   border-radius: 50%;
-  font-size: large;
-  width: 40px;
-  height: 40px;
   background-color: white;
-  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .show-menu:hover {
-  background-color: lightgray;
   cursor: pointer;
-}
-
-@media (max-width: 800px) {
-  nav {
-    width: unset;
-    height: 100%;
-    background: white;
-    border-right: 1px solid black;
-    min-height: 600px;
-  }
-
-  .show {
-    background-color: transparent;
-    border: none;
-  }
-
-  .show-menu {
-    display: unset;
-  }
-
-  .show>h1,
-  .show>.clear-storage {
-    display: none;
-  }
+  background-color: lightgray;
 }

@@ -276,38 +276,14 @@ export default function Game() {
           playerIsChecking={gameState.playerIsChecking}
           playerCanRaise={gameState.playerCanRaise}
         />
-        {/* <div className='debug'>
-          <button
-            onClick={() => console.log(gameState)}
-          >
-            Debug Info
-          </button>
-        </div> */}
-        {/* <button
-          className='new-game-button'
-          onClick={() => {
-            if (confirm('Are you sure?')) {
-              setGameState({
-                ...gameState,
-                inProgress: false,
-              });
-            } else {
-              return false;
-            }
-          }}
-        >
-          Start a New Game
-        </button> */}
       </section>
     )
   } else { // render new game component if game is not in progress
     return (
-      <section className='new-game'>
-        <NewGame
-          gameState={gameState}
-          setGameState={setGameState}
-        />
-      </section>
+      <NewGame
+        gameState={gameState}
+        setGameState={setGameState}
+      />
     )
   }
 }

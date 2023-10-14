@@ -1,12 +1,13 @@
 // NewPlayers handles the adding of new players to a new game
-
-// importing functions
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react"
 
 export default function NewPlayers({ playerNames, updateNewGame }) {
   function handleChange(e) {
     let newPlayers = [...playerNames];
-    newPlayers[e.target.name] = e.target.value.slice(0, 10);
+    let newName = e.target.value;
+    newPlayers[e.target.name] = newName;
 
     updateNewGame(
       'playerNames',
@@ -35,20 +36,22 @@ export default function NewPlayers({ playerNames, updateNewGame }) {
 
   return (
     <fieldset className="new-players">
-      <legend>Player Names</legend>
+      <legend>
+        Player Names
+      </legend>
       <ol className="new-player-list">
         {
           playerNames.map((player, index) =>
-            <li key={index}>
-              <label>
-                <input
-                  name={index}
-                  onChange={handleChange}
-                  value={player}
-                  minLength={1}
-                  placeholder="Enter Name Here"
-                />
-              </label>
+            <li
+              key={index}
+            >
+              <input
+                name={index}
+                onChange={handleChange}
+                value={player}
+                minLength={1}
+                placeholder="Enter Name Here"
+              />
             </li>
           )
         }
@@ -58,13 +61,13 @@ export default function NewPlayers({ playerNames, updateNewGame }) {
           className="add-new-player"
           onClick={handleAddPlayer}
         >
-          🙋
+          <FontAwesomeIcon icon={faPlus} />
         </button>
         <button
           className="remove-new-player"
           onClick={handleRemovePlayer}
         >
-          🙅
+          <FontAwesomeIcon icon={faMinus} />
         </button>
       </div>
     </fieldset>

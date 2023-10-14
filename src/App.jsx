@@ -3,8 +3,11 @@ import Game from './Game/Game'
 
 import { useState } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faCoins } from '@fortawesome/free-solid-svg-icons';
+
 function App() {
-  const [buttonText, setButtonText] = useState('>');
+  const [buttonText, setButtonText] = useState('<');
   const [navClassName, setNavClassName] = useState('show');
 
   function showMenu() {
@@ -13,11 +16,14 @@ function App() {
   }
 
   return (
-    <main className='content'>
-      <nav className={navClassName}>
-        <h1 className='title'>CHIPPIES</h1>
+    <main className='main-content'>
+      <nav className={navClassName}> {/* nav class is toggled */}
+        <h1 className='website-title'>
+          <FontAwesomeIcon icon={faCoins} />
+        </h1>
         <button
-          className='clear-storage'
+          title='Make a new game'
+          className='make-new-game'
           onClick={() => {
             if (confirm('Are you sure?')) {
               sessionStorage.clear()
@@ -25,10 +31,9 @@ function App() {
             }
           }} // clear session storage and reload page
         >
-          New Game
+          <FontAwesomeIcon icon={faPlus} />
         </button>
         <button
-          name='show-menu'
           className='show-menu'
           onClick={showMenu}
         >

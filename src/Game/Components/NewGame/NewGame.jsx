@@ -82,7 +82,7 @@ export default function NewGame({ gameState, setGameState }) {
     <section
       className="new-game"
     >
-      <h2>Make a New Game</h2>
+      <h2 className="new-game-title">Make a New Game</h2>
       <form
         className="new-game-form"
         onSubmit={handleSubmit}
@@ -102,10 +102,12 @@ export default function NewGame({ gameState, setGameState }) {
           startingChips={newGame.startingChips}
           updateNewGame={updateNewGame}
         />
-        <input
+        <button
+          className="start-new-game"
           type="submit"
-          value="Start Game"
-        />
+        >
+          Start New Game
+        </button>
       </form>
     </section>
   )

@@ -10,13 +10,16 @@ export default function StartingChips({ startingChips, updateNewGame }) {
 
   return (
     <fieldset className="starting-chips">
-      <legend>Starting Chips</legend>
+      <legend>
+        Starting Chips
+      </legend>
       <label>
-        💰
         <input
           type="number"
           onChange={handleChange}
           value={startingChips}
+          name="starting-chips-input"
+          className="starting-chips-input"
         />
       </label>
     </fieldset>

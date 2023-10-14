@@ -16,11 +16,15 @@ export default function BigBlindOptions({
 
   return (
     <fieldset className="big-blind-options">
-      <legend>Big Blind Options</legend>
+      <legend>
+        Big Blind Options
+      </legend>
       <label
         title='Big Blind amount'
       >
-        🪙
+        <p>
+          Big Blind
+        </p>
         <input
           type="number"
           name='bigBlind'
@@ -33,7 +37,9 @@ export default function BigBlindOptions({
       <label
         title='Big Blind Increment'
       >
-        🪙📈
+        <p>
+          Increase amount
+        </p>
         <input
           type="number"
           name='bigBlindIncrement'
@@ -45,7 +51,9 @@ export default function BigBlindOptions({
       <label
         title="Big Blind increases after this many turns"
       >
-        ⌛
+        <p>
+          Increase interval
+        </p>
         <input
           type="number"
           name='bigBlindTurn'
