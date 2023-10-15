@@ -1,21 +1,26 @@
 .main-content {
   width: 100vw;
   height: 100vh;
+  min-width: 300px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 3rem;
 }
 
 nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  height: 4rem;
+  min-width: 300px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: rgb(24, 26, 27);
+  background-color: var(--background-1);
   box-shadow: 0 0 10px black;
 }
 
@@ -33,12 +38,12 @@ nav {
   padding: 5px;
   font-size: 1rem;
   color: white;
-  background-color: rgb(24, 26, 27);
-  border-color: gray;
+  background-color: var(--background-2);
+  border-color: transparent;
   border-radius: 5px;
 }
 
 .make-new-game:hover {
   cursor: pointer;
-  background-color: darkgreen;
+  background-color: var(--background-3);
 }

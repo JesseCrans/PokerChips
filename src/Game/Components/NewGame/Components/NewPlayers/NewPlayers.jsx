@@ -17,6 +17,11 @@ export default function NewPlayers({ playerNames, updateNewGame }) {
 
   function handleAddPlayer(e) {
     e.preventDefault()
+    if (playerNames.length >= 6) {
+      alert('Maximum of 6 players');
+      return;
+    }
+
     updateNewGame(
       'playerNames',
       [...playerNames, '']

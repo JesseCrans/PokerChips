@@ -259,23 +259,25 @@ export default function Game() {
               setGameState={setGameState}
             /> : ''
         }
-        <GameInfo
-          phase={gameState.phase}
-          pot={gameState.pot}
-          bigBlind={gameState.bigBlind}
-        />
-        <Players
-          players={gameState.players}
-          turn={gameState.turn}
-          dealer={gameState.dealer}
-        />
-        <ActionButtons
-          callFunction={callFunction}
-          raiseFunction={raiseFunction}
-          foldFunction={foldFunction}
-          playerIsChecking={gameState.playerIsChecking}
-          playerCanRaise={gameState.playerCanRaise}
-        />
+        <div className='game-components'>
+          <GameInfo
+            phase={gameState.phase}
+            pot={gameState.pot}
+            bigBlind={gameState.bigBlind}
+          />
+          <Players
+            players={gameState.players}
+            turn={gameState.turn}
+            dealer={gameState.dealer}
+          />
+          <ActionButtons
+            callFunction={callFunction}
+            raiseFunction={raiseFunction}
+            foldFunction={foldFunction}
+            playerIsChecking={gameState.playerIsChecking}
+            playerCanRaise={gameState.playerCanRaise}
+          />
+        </div>
       </section>
     )
   } else { // render new game component if game is not in progress

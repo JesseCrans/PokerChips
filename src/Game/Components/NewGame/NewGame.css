@@ -1,19 +1,19 @@
 .new-game {
-  /* size */
   width: 30%;
-  min-width: 400px;
+  min-width: 350px;
   max-width: 700px;
   max-height: 70%;
   padding: 10px;
-
-  /* style */
-  background-color: rgb(24, 26, 27);
+  background-color: var(--background-1);
   color: lightgray;
-  border: 1px solid gray;
   border-radius: 20px;
   box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.new-game * {
+  color: lightgray;
 }
 
 .new-game-title {
@@ -22,25 +22,20 @@
 }
 
 .new-game-form {
-  /* display */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
-  /* size */
   width: 100%;
   padding: 20px;
 }
 
 .new-game fieldset {
-  /* size */
   width: 100%;
   margin: 10px;
   padding: 20px;
-
-  /* style */
-  border-color: gray;
+  border-color: transparent;
+  background-color: var(--background-2);
   border-radius: 10px;
 }
 
@@ -49,11 +44,14 @@
   width: 100%;
   margin: 5px;
   padding: 10px;
+  border: none;
   border-radius: 5px;
   font-size: 1rem;
-  background-color: rgb(24, 26, 27);
-  color: lightgray;
-  border-color: gray;
+  background-color: var(--background-1);
+}
+
+.start-new-game {
+  background-color: var(--background-2)
 }
 
 .new-player-buttons {
@@ -70,17 +68,16 @@
   height: 2rem;
   margin: 5px;
   padding: 5px;
+  border: none;
   border-radius: 5px;
-  background-color: rgb(24, 26, 27);
-  color: lightgray;
-  border-color: gray;
+  background-color: var(--background-1);
 }
 
 .add-new-player:hover,
 .remove-new-player:hover,
 .start-new-game:hover {
   cursor: pointer;
-  background-color: rgb(50, 52, 53);
+  background-color: var(--background-3);
 }
 
 /* .starting-chips-input,
