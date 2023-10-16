@@ -13,7 +13,7 @@ import "./NewGame.css"
 
 export default function NewGame({ gameState, setGameState }) {
   let [newGame, setNewGame] = useState({
-    playerNames: ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5', 'Player 6'],
+    playerNames: [''],
     startingChips: 10000,
     bigBlind: 50,
     bigBlindIncrement: 50,
