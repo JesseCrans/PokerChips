@@ -1,9 +1,7 @@
 // End of Round handles the end of the round
 
-// TODO: pot calculation still does not work correctly
-
-// importing functions
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import './EndOfRound.css';
 
 export default function EndOfRound({ gameState, setGameState }) {
   const [endState, setEndState] = useState({
@@ -172,7 +170,7 @@ export default function EndOfRound({ gameState, setGameState }) {
     <section className='end-of-round' >
       <h2>End of Round</h2>
       <form className='end-of-round-form'>
-        <p>Who won?</p>
+        <h2>Who won?</h2>
         {
           endState.pots.map((pot, potIndex) => {
             return (
@@ -216,6 +214,7 @@ export default function EndOfRound({ gameState, setGameState }) {
           type='submit'
           value='Next Round'
           onClick={handleSubmit}
+          className="next-round-button"
         />
       </form>
     </section>

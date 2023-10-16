@@ -35,6 +35,15 @@
   background-color: var(--background-3);
 }
 
+.button-list button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-list button:disabled:hover {
+  background-color: var(--background-1);
+}
+
 .action-buttons h2 {
   display: none;
 }

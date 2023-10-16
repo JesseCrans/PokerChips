@@ -1,7 +1,7 @@
 // Raising Form handles the raising of the players bet
 
-// importing functions
-import { useState } from "react"
+import { useState } from "react";
+import './RaisingForm.css';
 
 export default function RaisingForm({ gameState, setGameState }) {
   const difference = gameState.highestBet - gameState.players[gameState.turn].bet; // calculate the difference between the highest bet and the current bet
@@ -32,6 +32,11 @@ export default function RaisingForm({ gameState, setGameState }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (raiseAmount < minRaise) {
+      alert(`Raise must be at least ${minRaise}.`);
+      return;
+    }
+
     setGameState({
       ...gameState,
       players: gameState.players.map((player, index) => {
@@ -66,7 +71,7 @@ export default function RaisingForm({ gameState, setGameState }) {
           <p>Raise by: {raiseAmount - difference}</p>
           <p>Total spent: {raiseAmount}</p>
         </fieldset>
-        <fieldset>
+        <fieldset className="raise-input-fieldset">
           <legend>Specific Value</legend>
           <label>
             <p>Input range amount:</p>
@@ -89,7 +94,7 @@ export default function RaisingForm({ gameState, setGameState }) {
             />
           </label>
         </fieldset>
-        <fieldset>
+        <fieldset className="fractions">
           <legend>Fractions</legend>
           {potFractions.map((fraction, index) => {
             let fractionString = "";
@@ -116,6 +121,7 @@ export default function RaisingForm({ gameState, setGameState }) {
                     e.preventDefault();
                     setRaiseAmount(fraction);
                   }}
+                  className="fraction-button"
                 >
                   {fractionString}
                 </button>
@@ -125,19 +131,21 @@ export default function RaisingForm({ gameState, setGameState }) {
               <button
                 key={index}
                 disabled={true}
-                title='Big Blind is minimum raise'
+                title='Raise cannot be lower than the big blind.'
+                className="fraction-button"
               >
                 {fractionString}
               </button>
             )
           })}
         </fieldset>
-        <input type="submit" value="Raise" />
+        <input type="submit" value="Raise" className="raise-submit" />
         <button
           onClick={() => setGameState({
             ...gameState,
             playerIsRaising: false,
           })}
+          className="raise-cancel"
         >
           Cancel
         </button>

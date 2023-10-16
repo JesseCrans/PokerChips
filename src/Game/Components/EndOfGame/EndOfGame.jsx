@@ -1,5 +1,7 @@
 // EndOfGame handles the end of the game
 
+import './EndOfGame.css';
+
 export default function EndOfGame({ gameState, setGameState }) {
   return (
     <section className='end-of-game'>

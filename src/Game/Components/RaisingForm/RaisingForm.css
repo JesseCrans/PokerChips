@@ -1,0 +1,102 @@
+.raising-form {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 99;
+}
+
+.raising-form h2 {
+  display: none;
+}
+
+.raising-form-form {
+  width: 30%;
+  height: 70%;
+  min-width: 350px;
+  max-width: 700px;
+  background-color: var(--background-1);
+  color: lightgray;
+  border-radius: 20px;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+
+.raising-form * {
+  color: lightgray;
+}
+
+.raising-form-form fieldset {
+  width: 100%;
+  margin: 10px;
+  padding: 20px;
+  border-color: transparent;
+  background-color: var(--background-2);
+  border-radius: 10px;
+}
+
+.raise-input-fieldset input,
+.raise-submit,
+.raise-cancel {
+  width: 100%;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.raise-input-fieldset input {
+  background-color: var(--background-1);
+}
+
+.raise-submit,
+.raise-cancel {
+  background-color: var(--background-2);
+}
+
+.raise-submit:hover,
+.raise-cancel:hover {
+  cursor: pointer;
+  background-color: var(--background-3);
+}
+
+.fractions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.fraction-button {
+  width: 18%;
+  height: 2rem;
+  background-color: var(--background-1);
+  border-radius: 5px;
+  border: none;
+}
+
+.fraction-button:hover {
+  cursor: pointer;
+  background-color: var(--background-3);
+}
+
+.fraction-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fraction-button:disabled:hover {
+  background-color: var(--background-1);
+}

@@ -22,6 +22,7 @@ nav {
   align-items: center;
   background-color: var(--background-1);
   box-shadow: 0 0 10px black;
+  z-index: 999;
 }
 
 .website-title {

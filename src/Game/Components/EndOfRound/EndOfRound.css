@@ -1,16 +1,70 @@
 .end-of-round {
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 99;
 }
 
-.pot-fieldset {
+.end-of-round>h2 {
+  display: none;
+}
+
+.end-of-round-form {
+  width: 30%;
+  height: 70%;
+  min-width: 350px;
+  max-width: 700px;
+  background-color: var(--background-1);
+  color: lightgray;
+  border-radius: 20px;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: scroll;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  gap: 5px;
+  padding: 20px;
+}
+
+.end-of-round-form fieldset {
+  width: 100%;
+  margin: 10px;
+  padding: 20px;
+  border: none;
+  background-color: var(--background-2);
+  border-radius: 10px;
+}
+
+.end-of-round-form * {
+  color: lightgray;
+}
+
+.end-of-round-form label {
+  display: block;
+  margin: 5px;
+}
+
+.end-of-round-form p {
+  display: inline;
+}
+
+.next-round-button {
+  width: 100%;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--background-2);
+}
+
+.next-round-button:hover {
+  cursor: pointer;
+  background-color: var(--background-3);
 }

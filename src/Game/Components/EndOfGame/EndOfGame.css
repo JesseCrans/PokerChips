@@ -1,0 +1,37 @@
+.end-of-game {
+  width: 50%;
+  height: 40%;
+  min-width: 350px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-1);
+  color: lightgray;
+  border-radius: 20px;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.end-of-game h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+
+.new-game-button {
+  width: 100%;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--background-2);
+  color: lightgray;
+}
+
+.new-game-button:hover {
+  cursor: pointer;
+  background-color: var(--background-3);
+}
